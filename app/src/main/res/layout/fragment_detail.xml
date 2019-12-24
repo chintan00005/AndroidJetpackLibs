@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" >
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.DetailFragment">
+
+    <ImageView
+        android:id="@+id/ivDogImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="200dp"
+        android:src="@mipmap/ic_launcher"
+        android:scaleType="fitCenter"
+        android:layout_alignParentTop="true"/>
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivDogImage"
+        android:layout_marginTop="5dp"
+        style="@style/Title"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/tvDesc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvTitle"
+        android:layout_marginTop="5dp"
+        style="@style/Desc"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/tvTemperament"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvDesc"
+        android:layout_marginTop="5dp"
+        style="@style/Desc"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/lifeSpan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvTemperament"
+        android:layout_marginTop="5dp"
+        style="@style/Desc"
+        android:layout_centerHorizontal="true"/>
+
+
+</RelativeLayout>
+</layout>
