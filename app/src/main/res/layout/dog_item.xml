@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 <LinearLayout
+    android:id="@+id/rlView"
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="130dp">
 
@@ -19,19 +20,20 @@
         android:layout_weight="3"
         android:padding="5dp"
         android:orientation="vertical"
+        android:gravity="center_vertical"
         >
 
         <TextView
             android:id="@+id/tvDogName"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             style="@style/Title"
             />
 
         <TextView
             android:id="@+id/tvDogDetails"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             style="@style/Desc"
             android:layout_marginTop="5dp"
             />
