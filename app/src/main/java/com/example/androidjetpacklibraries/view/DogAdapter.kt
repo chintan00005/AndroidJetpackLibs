@@ -29,7 +29,10 @@ class DogAdapter(val dogList : ArrayList<Dog>) : RecyclerView.Adapter<DogAdapter
         holder.view.tvDogName.text = dogList[position].dogBreed
         holder.view.tvDogDetails.text = dogList[position].dogBreedGroup
         holder.view.rlView.setOnClickListener {
-            Navigation.findNavController(it).navigate(ListFragmentDirections.actionDetailFragment())
+            val action = ListFragmentDirections.actionDetailFragment()
+            action.dogid = (dogList[position].uuid).toInt()
+            //  action.dogid = dogList[position].dogId?.toInt() ?: 0
+            Navigation.findNavController(it).navigate(action)
         }
         dogList[position].dogImage?.let { holder.view.ivDogImage.loadImage(it,getPlaceHolder( holder.view.ivDogImage.context)) }
     }
