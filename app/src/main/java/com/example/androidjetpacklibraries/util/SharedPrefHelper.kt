@@ -31,5 +31,8 @@ class SharedPrefHelper {
     fun getTime(): Long {
         return pref?.getLong(PREF_TIME,0)?:0L;
     }
+    fun getCacheDuration(): String {
+        return pref?.getString("cache_time","15")?:"20";
+    }
 
 }

@@ -2,9 +2,18 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" >
+    <data>
+        <variable
+            name="dogDetail"
+            type="com.example.androidjetpacklibraries.model.Dog" />
+        <variable
+            name="dogPal"
+            type="com.example.androidjetpacklibraries.model.DogPaller" />
+    </data>
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@{dogPal.color}"
     tools:context=".view.DetailFragment">
 
     <ImageView
@@ -14,6 +23,7 @@
         android:minHeight="200dp"
         android:src="@mipmap/ic_launcher"
         android:scaleType="fitCenter"
+        load="@{dogDetail.dogImage}"
         android:layout_alignParentTop="true"/>
 
     <TextView
@@ -23,6 +33,7 @@
         android:layout_below="@+id/ivDogImage"
         android:layout_marginTop="5dp"
         style="@style/Title"
+        android:text="@{dogDetail.dogBreed}"
         android:layout_centerHorizontal="true"/>
 
     <TextView
@@ -32,6 +43,7 @@
         android:layout_below="@+id/tvTitle"
         android:layout_marginTop="5dp"
         style="@style/Desc"
+        android:text="@{dogDetail.dogBreedGroup}"
         android:layout_centerHorizontal="true"/>
 
     <TextView
@@ -41,6 +53,7 @@
         android:layout_below="@+id/tvDesc"
         android:layout_marginTop="5dp"
         style="@style/Desc"
+        android:text="@{dogDetail.dogTemperament}"
         android:layout_centerHorizontal="true"/>
 
     <TextView
@@ -50,6 +63,7 @@
         android:layout_below="@+id/tvTemperament"
         android:layout_marginTop="5dp"
         style="@style/Desc"
+        android:text="@{dogDetail.dogLifeSpan}"
         android:layout_centerHorizontal="true"/>
 
 

@@ -14,6 +14,9 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/settingFragment"
+            app:destination="@id/settingFragment" />
 
 
     </fragment>
@@ -28,4 +31,8 @@
             app:argType="integer"
             android:defaultValue="0"/>
     </fragment>
+    <fragment
+        android:id="@+id/settingFragment"
+        android:name="com.example.androidjetpacklibraries.view.SettingFragment"
+        android:label="SettingFragment" />
 </navigation>

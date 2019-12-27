@@ -4,15 +4,18 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.androidjetpacklibraries.R
+import com.example.androidjetpacklibraries.databinding.DogItemBinding
 import com.example.androidjetpacklibraries.model.Dog
 import com.example.androidjetpacklibraries.util.getPlaceHolder
 import com.example.androidjetpacklibraries.util.loadImage
 import kotlinx.android.synthetic.main.dog_item.view.*
 
-class DogAdapter(val dogList : ArrayList<Dog>) : RecyclerView.Adapter<DogAdapter.DogViewHolder>(){
+class DogAdapter(val dogList : ArrayList<Dog>) : RecyclerView.Adapter<DogAdapter.DogViewHolder>(),
+    DogListner {
 
     fun updateList(listUpdated : ArrayList<Dog>)
     {
@@ -26,22 +29,22 @@ class DogAdapter(val dogList : ArrayList<Dog>) : RecyclerView.Adapter<DogAdapter
     }
 
     override fun onBindViewHolder(holder: DogViewHolder, position: Int) {
-        holder.view.tvDogName.text = dogList[position].dogBreed
-        holder.view.tvDogDetails.text = dogList[position].dogBreedGroup
-        holder.view.rlView.setOnClickListener {
-            val action = ListFragmentDirections.actionDetailFragment()
-            action.dogid = (dogList[position].uuid).toInt()
-            //  action.dogid = dogList[position].dogId?.toInt() ?: 0
-            Navigation.findNavController(it).navigate(action)
-        }
-        dogList[position].dogImage?.let { holder.view.ivDogImage.loadImage(it,getPlaceHolder( holder.view.ivDogImage.context)) }
+        holder.view.dog = dogList[position]
+        holder.view.listner = this
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DogViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.dog_item,parent,false)
-        return DogViewHolder(view)
+        val view = DataBindingUtil.inflate<DogItemBinding>(LayoutInflater.from(parent.context),R.layout.dog_item,parent,false)
+        return  DogViewHolder(view)
     }
 
 
-    class DogViewHolder(val view:View) : RecyclerView.ViewHolder(view)
+
+    class DogViewHolder(val view:DogItemBinding) : RecyclerView.ViewHolder(view.root)
+
+    override fun onViewClick(view :View,dogUUId:Long) {
+            val action = ListFragmentDirections.actionDetailFragment()
+            action.dogid = (dogUUId).toInt()
+            Navigation.findNavController(view).navigate(action)
+    }
 }

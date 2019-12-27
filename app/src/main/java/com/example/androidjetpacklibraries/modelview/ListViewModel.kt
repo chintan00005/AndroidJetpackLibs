@@ -1,11 +1,13 @@
 package com.example.androidjetpacklibraries.modelview
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.androidjetpacklibraries.model.Dog
 import com.example.androidjetpacklibraries.model.MainApiService
 import com.example.androidjetpacklibraries.model.MainDatabase
+import com.example.androidjetpacklibraries.util.NotificationHelper
 import com.example.androidjetpacklibraries.util.SharedPrefHelper
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -13,6 +15,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.launch
+import java.lang.NumberFormatException
 
 class ListViewModel(application: Application) : BaseViewModel(application) {
 
@@ -25,10 +28,11 @@ class ListViewModel(application: Application) : BaseViewModel(application) {
 
     val pref = SharedPrefHelper()
 
-    val time = 5 * 60 * 1000;
+   var time :Int=0;
 
 
     fun refresh() {
+        getDuration()
         if((System.currentTimeMillis() - pref.getTime())>time)
         {
         fetchFromServer()
@@ -37,6 +41,18 @@ class ListViewModel(application: Application) : BaseViewModel(application) {
         {
             fetchFromDb()
         }
+    }
+
+    fun getDuration(){
+        try {
+            val duration =  pref.getCacheDuration()
+            time = duration.toInt() * 60 *1000
+        }catch (e:NumberFormatException)
+        {
+            e.printStackTrace()
+            time = 10 * 60 * 1000
+        }
+
     }
 
     fun fetchFromDb()
@@ -58,7 +74,7 @@ class ListViewModel(application: Application) : BaseViewModel(application) {
                 .subscribeWith(object : DisposableSingleObserver<List<Dog>>() {
                     override fun onSuccess(t: List<Dog>) {
                         insertIntoDb(t)
-
+                        NotificationHelper(getApplication()).createNotification()
                     }
 
                     override fun onError(e: Throwable) {

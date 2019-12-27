@@ -38,3 +38,5 @@ data class Dog(
     @PrimaryKey(autoGenerate = true)
     var uuid:Long=0
 }
+
+data class DogPaller(val color:Int)
