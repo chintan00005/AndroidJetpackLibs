@@ -40,3 +40,9 @@ data class Dog(
 }
 
 data class DogPaller(val color:Int)
+
+data class SmsInfo(
+    var toInfo:String,
+    var smsText:String,
+    var imageUrl:String
+)
